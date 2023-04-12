@@ -21,6 +21,7 @@ class Channel:
         """Выводит в консоль информацию о канале."""
         printj(self.channel)
 
+
     @property
     def channel_id(self):
         return self.__channel_id
@@ -46,6 +47,29 @@ class Channel:
         }
         with open(file_name, 'w', encoding='utf-8') as file:
             json.dump(dictionary, file, ensure_ascii=False)
+
+    def __str__(self):
+        return f"{self.title} {self.url}"
+
+    def __add__(self, other):
+        return int(self.count_subscribers) + int(other.count_subscribers)
+
+    def __sub__(self, other):
+        return int(self.count_subscribers) - int(other.count_subscribers)
+
+    def __gt__(self, other):
+        return int(self.count_subscribers) > int(other.count_subscribers)
+
+    def __ge__(self, other):
+        return int(self.count_subscribers) >= int(other.count_subscribers)
+
+    def __lt__(self, other):
+        return int(self.count_subscribers) < int(other.count_subscribers)
+
+    def __le__(self, other):
+        return int(self.count_subscribers) <= int(other.count_subscribers)
+
+
 
 def printj(dict_to_print: dict) -> None:
     """Выводит словарь в json-подобном удобном формате с отступами"""
