@@ -1,4 +1,4 @@
-import json, os
+import json , os
 from googleapiclient.discovery import build
 
 
@@ -16,11 +16,9 @@ class Channel:
         self.views_count = self.channel['items'][0]["statistics"]["viewCount"]
         self.url = f"https://www.youtube.com/channel/{self.id}"
 
-
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
         printj(self.channel)
-
 
     @property
     def channel_id(self):
@@ -29,13 +27,14 @@ class Channel:
     @channel_id.setter
     def channel_id(self, new_name):
         print("AttributeError: property 'channel_id' of 'Channel' object has no setter")
+
     @classmethod
     def get_service(cls):
         api_key: str = os.getenv('YT_API_KEY')
         return build('youtube', 'v3', developerKey=api_key)
 
     def to_json(self, file_name):
-        """Cохраняет в файл значения атрибутов экземпляра класса `Channel`"""
+        """Сохраняет в файл значения атрибутов экземпляра класса `Channel`"""
         dictionary = {
             "id": self.__channel_id,
             "title": self.title,
@@ -70,10 +69,6 @@ class Channel:
         return int(self.count_subscribers) <= int(other.count_subscribers)
 
 
-
 def printj(dict_to_print: dict) -> None:
     """Выводит словарь в json-подобном удобном формате с отступами"""
     print(json.dumps(dict_to_print, indent=2, ensure_ascii=False))
-
-
-
