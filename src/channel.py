@@ -1,11 +1,9 @@
-import json , os
+import json, os
 from googleapiclient.discovery import build
 
 
 class Channel:
-    """Класс для ютуб-канала"""
     def __init__(self, channel_id: str) -> None:
-        """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
         self.__channel_id = channel_id
         self.channel = self.get_service().channels().list(id=channel_id, part='snippet,statistics').execute()
         self.id = self.channel['items'][0]["id"]
