@@ -4,6 +4,7 @@ from googleapiclient.discovery import build
 
 class Channel:
     def __init__(self, channel_id: str) -> None:
+        super().__init__()
         self.__channel_id = channel_id
         self.channel = self.get_service().channels().list(id=channel_id, part='snippet,statistics').execute()
         self.id = self.channel['items'][0]["id"]
