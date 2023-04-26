@@ -11,8 +11,11 @@ class PlayList(Channel):
         self.playlist_videos = self.youtube.playlistItems().list(playlistId=playlist_id, part='contentDetails', maxResults=50,).execute()
         self.video_ids: list[str] = [video['contentDetails']['videoId'] for video in self.playlist_videos['items']]
         self.video_response = self.youtube.videos().list(part='contentDetails,statistics',  id=','.join(self.video_ids)).execute()
-
-        self.title = "Редакция. АнтиТревел"
+        playlist_videos = self.youtube.playlists().list(id=playlist_id,
+                                                        part='snippet',
+                                                        maxResults=50,
+                                                        ).execute()
+        self.title = playlist_videos['items'][0]['snippet']['title']
         self.url = f"https://www.youtube.com/playlist?list={playlist_id}"
 
 
