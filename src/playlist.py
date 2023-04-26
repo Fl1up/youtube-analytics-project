@@ -29,8 +29,6 @@ class PlayList(Channel):
     def show_best_video(self):
         max_likes = 0
         for video in self.video_response["items"]:
-            print(self.video_response)
-            print(self.playlist_videos)
             if int(video['statistics']['likeCount']) > max_likes:
                 max_likes = int(video['statistics']['likeCount'])
                 best_video: str = video["id"]
